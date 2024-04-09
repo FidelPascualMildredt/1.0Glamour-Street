@@ -17,8 +17,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2);
             $table->string('image')->nullable();
-            // $table->string('size')->nullable();
-            // $table->string('color')->nullable();
             $table->string('material')->nullable();
             $table->unsignedInteger('stock')->default(0);
             $table->string('code')->nullable();

@@ -55,7 +55,7 @@
                         </dl>
                         <dl class="row">
                             <dt class="col-sm-4">Imagen:</dt>
-                            <dd class="col-sm-8">{{ $product->image }}</dd>
+                            <img src="{{ asset('images/' . $product->image) }}" width="30%">
                         </dl>
                         <!-- Agregar más detalles según sea necesario -->
                         {{-- <dl class="row">

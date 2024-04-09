@@ -39,8 +39,6 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file size limit as needed
-            'size' => 'nullable|string',
-            'color' => 'nullable|string',
             'material' => 'nullable|string',
             'stock' => 'nullable|integer',
             'code' => 'nullable|string',
@@ -61,8 +59,6 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'image' => $imageName,
-            'size' => $request->size,
-            'color' => $request->color,
             'material' => $request->material,
             'stock' => $request->stock,
             'code' => $request->code,
@@ -110,17 +106,32 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->size = $request->size;
-        $product->color = $request->color;
+
         $product->material = $request->material;
         $product->stock = $request->stock;
         $product->code = $request->code;
         $product->category_id = $request->category_id;
         // Si se proporcionó una nueva imagen, almacenarla
+        // Verificar si se proporcionó un nuevo archivo de imagen
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('product_images');
-            $product->image = $imagePath;
+            $image = $request->file('image');
+
+            // Verificar si la imagen es válida
+            if ($image->isValid()) {
+                // Generar un nombre único para la imagen
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+                // Mover la imagen a la carpeta 'public/images'
+                $image->move(public_path('images'), $imageName);
+
+                // Actualizar el nombre de la imagen en el modelo del producto
+                $product->image = $imageName;
+            } else {
+                // Manejar el caso de que la imagen no sea válida
+                return redirect()->back()->with('error', 'La imagen no es válida.');
+            }
         }
+
 
         $product->save();
 
@@ -145,6 +156,6 @@ class ProductController extends Controller
         $categories = Category::all();
         $colors = Color::all();
         $sizes = Size::all();
-        return view('welcome', compact('products', 'categories','colors', 'sizes'));
+        return view('welcome', compact('products', 'categories', 'colors', 'sizes'));
     }
 }

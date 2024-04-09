@@ -11,6 +11,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         /* Aplica el color de fondo a todo el body */
         body {
@@ -333,8 +335,17 @@
                     <h6 class="mt-3 text-light">Categorías:</h6>
                     <div class="list-group">
                         @foreach ($categories as $category)
-                            <a href="#"
-                                class="list-group-item list-group-item-action bg-transparent border-0 text-secondary shadow-dark">{{ $category->name }}</a>
+                            <button
+                                class="list-group-item list-group-item-action bg-transparent border-0 text-secondary shadow-dark"
+                                data-toggle="collapse" data-target="#category-{{ $category->id }}"
+                                aria-expanded="false" aria-controls="category-{{ $category->id }}">
+                                {{ $category->name }}
+                            </button>
+                            <div class="collapse" id="category-{{ $category->id }}">
+                                <div class="card card-body">
+                                    {{ $category->description }}
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                     <hr>
@@ -351,7 +362,6 @@
                         <!-- Agrega más tallas según sea necesario -->
                     </div>
                 </div>
-
             </div>
 
 
@@ -390,22 +400,25 @@
                         </button>
                     </div>
                 </div>
+
+
                 <div class="col-md-12">
-                    <h4 class="text-secondary mb-4"
-                        style="border-bottom: 1px solid #1e1d1d; padding-bottom: 10px; font-family: 'Montserrat', sans-serif;">
-                        Productos</h4>
+                    <h4 class="text-secondary mb-4" style="border-bottom: 1px solid #1e1d1d; padding-bottom: 10px; font-family: 'Montserrat', sans-serif;">
+                        Productos
+                    </h4>
                     <div class="row">
                         @foreach ($products as $product)
                             <div class="col-md-4 mb-3">
                                 <div class="card bg-transparent border-0">
-                                    <img src="{{ asset('assets/images/carrusel/pantalon.jpg') }}"
-                                        class="card-img-top" alt="...">
-                                    <div class="card-body p-0 ">
+                                    <img src="{{ asset('images/' . $product->image) }}">
+
+                                    <div class="card-body p-0">
                                         <h5 class="card-title text-white">{{ $product->name }}</h5>
                                         <p class="card-text text-white">{{ $product->description }}</p>
                                         <p class="card-text text-white">Precio: ${{ $product->price }}</p>
+
                                         <!-- Íconos de estrellas para calificación -->
-                                        <div class="d-flex justify-content-center align-items-center">
+                                        <div class="d-flex justify-content-center align-items-center mb-2">
                                             @for ($i = 0; $i < 5; $i++)
                                                 @if ($i < $product->rating)
                                                     <i class="bi bi-star-fill text-warning"></i>
@@ -414,8 +427,16 @@
                                                 @endif
                                             @endfor
                                         </div>
-                                        <a href="#" class="btn btn-primary custom-btn-color"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal">+ Agregar</a>
+
+                                        <!-- Contenedor para botones de "agregar" y "compartir" -->
+                                        <div class="d-md-flex">
+                                            <!-- Botón de "dar like" -->
+                                            <button type="button" class="btn btn-link text-white like-btn" data-product-id="{{ $product->id }}">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </div>
+
+                                        <a href="#" class="btn btn-primary custom-btn-color" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Agregar</a>
                                     </div>
                                 </div>
                             </div>
@@ -443,7 +464,7 @@
                     <div class="row">
                         <!-- Columna para la imagen -->
                         <div class="col-md-6">
-                            <img src="{{ asset('assets/images/carrusel/deportivo.jpg') }}" class="img-fluid"
+                            <img src="{{ asset('images/' . $product->image) }}" width="60%" class="img-fluid"
                                 alt="Producto">
                         </div>
                         <!-- Columna para la información -->
@@ -518,10 +539,14 @@
         </div>
     </footer>
 
+
+
     <!-- Bootstrap Bundle with Popper -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script>
         // Obtener el elemento del input de cantidad
         var cantidadInput = document.getElementById('cantidad');
 
@@ -545,6 +570,26 @@
             var cantidad = parseInt(cantidadInput.value);
             cantidadInput.value = cantidad + 1; // Aumentar la cantidad en 1
         });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener todos los botones de "dar like"
+            var likeButtons = document.querySelectorAll('.like-btn');
+
+            // Agregar un controlador de eventos para cada botón de "dar like"
+            likeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Obtener el ID del producto asociado con el botón
+                    var productId = button.getAttribute('data-product-id');
+
+                    // Realizar la lógica para cambiar el estado del "like"
+                    // Por ejemplo, cambiar el color del corazón cuando se hace clic
+                    button.querySelector('i').classList.toggle('text-danger');
+                });
+            });
+        });
+
+
     </script>
 
 </body>
