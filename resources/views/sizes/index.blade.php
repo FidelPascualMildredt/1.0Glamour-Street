@@ -74,7 +74,7 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Si se confirma la eliminación, envía el formulario
+                    
                     document.getElementById('deleteForm' + sizeId).submit();
                 }
             });
