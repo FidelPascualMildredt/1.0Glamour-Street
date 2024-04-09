@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Size;
+use App\Models\Color;
 
 class ProductController extends Controller
 {
@@ -141,6 +143,8 @@ class ProductController extends Controller
 
         $products = Product::all();
         $categories = Category::all();
-        return view('welcome', compact('products', 'categories'));
+        $colors = Color::all();
+        $sizes = Size::all();
+        return view('welcome', compact('products', 'categories','colors', 'sizes'));
     }
 }

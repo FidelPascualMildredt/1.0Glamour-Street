@@ -92,4 +92,12 @@ class PaymentController extends Controller
         $payment->delete();
         return redirect()->route('payments.index')->with('success', 'Pago eliminado correctamente');
     }
+
+
+    public function carrito()
+    {
+
+        return view('carrito');
+    }
+
 }

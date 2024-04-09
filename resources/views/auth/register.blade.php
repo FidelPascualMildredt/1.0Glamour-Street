@@ -77,10 +77,10 @@
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 <x-label for="last_name" value="{{ __('Apellido') }}" />
                 <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
-            </div>
+            </div> --}}
 
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
@@ -97,15 +97,15 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 <x-label for="address" value="{{ __('Dirección') }}" />
                 <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autofocus autocomplete="address" />
-            </div>
+            </div> --}}
 
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 <x-label for="telephone" value="{{ __('Teléfono') }}" />
                 <x-input id="telephone" class="block mt-1 w-full" type="text" name="telephone" :value="old('telephone')" required autofocus autocomplete="telephone" />
-            </div>
+            </div> --}}
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">

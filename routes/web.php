@@ -13,6 +13,8 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
 use App\Actions\Fortify\CreateNewUser;
+use App\Models\Payment;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,8 +59,11 @@ Route::post('/register', [CreateNewUser::class, 'create'])->name('register');
 
 Route::get('/', [CategoryController::class, 'boton'])->name('welcome');
 Route::get('/', [ProductController::class, 'displayProducts'])->name('productos.display');
+Route::get('/carrito', [PaymentController::class, 'carrito'])->name('carrito');
 
 
 
 
-
+Route::get('dashboard', function () {
+    return view('dashboard');
+});

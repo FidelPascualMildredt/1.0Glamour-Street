@@ -29,8 +29,6 @@
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Precio</th>
                                         <th scope="col">Imagen</th>
-                                        {{-- <th scope="col">Talla</th> --}}
-                                        {{-- <th scope="col">Color</th> --}}
                                         <th scope="col">Material</th>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Código</th>

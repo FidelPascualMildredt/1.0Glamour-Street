@@ -49,11 +49,11 @@
                                 <input type="text" class="form-control" id="name" name="name"
                                     placeholder="Introduzca su nombre">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="last_name">Apellidos</label>
                                 <input type="text" class="form-control" id="last_name" name="last_name"
                                     placeholder="Introduzca sus apellidos">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email"
@@ -69,16 +69,16 @@
                                 <input type="password" class="form-control" id="confirm_password" name="password_confirmation"
                                     placeholder="Confirmar Contraseña">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="address">Dirección</label>
                                 <input type="text" class="form-control" id="address" name="address"
                                     placeholder="Agrega tu dirección">
-                            </div>
-                            <div class="form-group">
+                            </div> --}}
+                            {{-- <div class="form-group">
                                 <label for="telephone">Telefono</label>
                                 <input type="text" class="form-control" id="telephone" name="telephone"
                                     placeholder="Agregar número de Teelefono">
-                            </div>
+                            </div> --}}
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-light"><i class="icon-lock"></i> Registrar</button>
                             </div>
