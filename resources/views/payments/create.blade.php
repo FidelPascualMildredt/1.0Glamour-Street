@@ -52,11 +52,17 @@
                                     <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
                                     <option value="Tarjeta de Débito">Tarjeta de Débito</option>
                                 </select>
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Descripción</label>
                                 <textarea class="form-control" id="description" name="description" rows="3"
                                     placeholder="Introduzca la descripción del pago"></textarea>
+                                @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group text-center">

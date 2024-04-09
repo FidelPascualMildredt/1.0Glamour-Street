@@ -45,8 +45,11 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ $category->name }}"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $category->name }}"
                                     placeholder="Introduzca el nombre de la categoría">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Descripción</label>
@@ -69,6 +72,7 @@
             </div>
         </div>
     </div>
+
 
     @include('components.color-switcher')
     @include('components.scripts')

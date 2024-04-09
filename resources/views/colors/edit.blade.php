@@ -37,7 +37,7 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-6" style="margin-top: 50px;"> <!-- Agregamos margen superior -->
+            <div class="col-lg-6" style="margin-top: 50px;">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Editar Color</div>
@@ -47,8 +47,10 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ $color->name }}" placeholder="Introduzca el nombre del color">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $color->name }}" placeholder="Introduzca el nombre del color">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group text-center">
@@ -61,6 +63,7 @@
             </div>
         </div>
     </div>
+
 
     @include('components.color-switcher')
     @include('components.scripts')

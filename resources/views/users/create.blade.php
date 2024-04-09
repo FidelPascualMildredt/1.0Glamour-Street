@@ -37,7 +37,7 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-6" style="margin-top: 50px;"> <!-- Agregamos margen superior -->
+            <div class="col-lg-6" style="margin-top: 50px;">
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">Crear Usuario</div>
@@ -46,39 +46,39 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                                     placeholder="Introduzca su nombre">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="last_name">Apellidos</label>
-                                <input type="text" class="form-control" id="last_name" name="last_name"
-                                    placeholder="Introduzca sus apellidos">
-                            </div> --}}
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
                                     placeholder="Introduzca Email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password"
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password"
                                     placeholder="Introduzca Contraseña">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="confirm_password">Confirmar Contraseña</label>
                                 <input type="password" class="form-control" id="confirm_password" name="password_confirmation"
                                     placeholder="Confirmar Contraseña">
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="address">Dirección</label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Agrega tu dirección">
-                            </div> --}}
-                            {{-- <div class="form-group">
-                                <label for="telephone">Telefono</label>
-                                <input type="text" class="form-control" id="telephone" name="telephone"
-                                    placeholder="Agregar número de Teelefono">
-                            </div> --}}
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-light"><i class="icon-lock"></i> Registrar</button>
                             </div>
@@ -88,6 +88,7 @@
             </div>
         </div>
     </div>
+
 
     @include('components.color-switcher')
     @include('components.scripts')

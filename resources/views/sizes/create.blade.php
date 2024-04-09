@@ -48,6 +48,9 @@
                                 <label for="name">Nombre</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     placeholder="Introduzca el nombre del tamaño">
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group text-center">
@@ -60,6 +63,7 @@
             </div>
         </div>
     </div>
+
 
     @include('components.color-switcher')
     @include('components.scripts')

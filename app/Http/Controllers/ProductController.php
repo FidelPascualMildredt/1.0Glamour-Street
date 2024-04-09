@@ -95,10 +95,14 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'image' => 'nullable|image|max:2048',
+            'price' => 'sometimes|required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file size limit as needed
+            'material' => 'nullable|string',
+            'stock' => 'nullable|integer',
+            'code' => 'nullable|string',
+            'category_id' => 'sometimes|required|exists:categories,id',
             // Agregar validaciones para los demás campos según sea necesario
         ]);
 

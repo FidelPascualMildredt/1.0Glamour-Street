@@ -46,48 +46,63 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $product->name }}">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Descripción</label>
-                                <textarea class="form-control" id="description" name="description" rows="3">{{ $product->description }}</textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ $product->description }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="price">Precio</label>
-                                <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
+                                <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ $product->price }}">
+                                @error('price')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="image">Imagen</label>
-                                <input type="file" class="form-control" id="image" name="image">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <!-- Agregar más campos según la migración -->
-                            {{-- <div class="form-group">
-                                <label for="size">Talla</label>
-                                <input type="text" class="form-control" id="size" name="size" value="{{ $product->size }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="color">Color</label>
-                                <input type="text" class="form-control" id="color" name="color" value="{{ $product->color }}">
-                            </div> --}}
                             <div class="form-group">
                                 <label for="material">Material</label>
-                                <input type="text" class="form-control" id="material" name="material" value="{{ $product->material }}">
+                                <input type="text" class="form-control @error('material') is-invalid @enderror" id="material" name="material" value="{{ $product->material }}">
+                                @error('material')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="stock">Stock</label>
-                                <input type="number" class="form-control" id="stock" name="stock" value="{{ $product->stock }}">
+                                <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" value="{{ $product->stock }}">
+                                @error('stock')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="code">Código</label>
-                                <input type="text" class="form-control" id="code" name="code" value="{{ $product->code }}">
+                                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ $product->code }}">
+                                @error('code')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category">Categoría</label>
-                                <select class="form-select" id="category" name="category_id">
+                                <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id">
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('category_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group text-center">
@@ -100,6 +115,7 @@
             </div>
         </div>
     </div>
+
 
     @include('components.color-switcher')
     @include('components.scripts')

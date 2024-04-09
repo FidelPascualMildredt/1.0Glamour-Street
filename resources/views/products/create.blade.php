@@ -46,56 +46,69 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                                     placeholder="Introduzca el nombre del producto">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="description">Descripción</label>
-                                <textarea class="form-control" id="description" name="description" rows="3"
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3"
                                     placeholder="Introduzca la descripción del producto"></textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="price">Precio</label>
-                                <input type="text" class="form-control" id="price" name="price"
+                                <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price"
                                     placeholder="Introduzca el precio del producto">
+                                @error('price')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="image">Imagen</label>
-                                <input type="file" class="form-control" id="image" name="image">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <!-- Agregar más campos según la migración -->
-                            {{-- <div class="form-group">
-                                <label for="size">Talla</label>
-                                <input type="text" class="form-control" id="size" name="size"
-                                    placeholder="Introduzca el tamaño del producto">
-                            </div>
-                            <div class="form-group">
-                                <label for="color">Color</label>
-                                <input type="text" class="form-control" id="color" name="color"
-                                    placeholder="Introduzca el color del producto">
-                            </div> --}}
                             <div class="form-group">
                                 <label for="material">Material</label>
-                                <input type="text" class="form-control" id="material" name="material"
+                                <input type="text" class="form-control @error('material') is-invalid @enderror" id="material" name="material"
                                     placeholder="Introduzca el material del producto">
+                                @error('material')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="stock">Stock</label>
-                                <input type="number" class="form-control" id="stock" name="stock"
+                                <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock"
                                     placeholder="Introduzca la cantidad en stock del producto">
+                                @error('stock')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="code">Código</label>
-                                <input type="text" class="form-control" id="code" name="code"
+                                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code"
                                     placeholder="Introduzca el código del producto">
+                                @error('code')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category">Categoría</label>
-                                <select class="form-select" id="category" name="category_id">
+                                <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id">
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('category_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group text-center">

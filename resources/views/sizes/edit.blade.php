@@ -41,11 +41,16 @@
                         <hr>
                         <form method="POST" action="{{ route('sizes.update', $size->id) }}">
                             @csrf
-                            @method('PUT') <!-- Agregar el método PUT para enviar la solicitud de actualización -->
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name"
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                                     value="{{ $size->name }}" placeholder="Introduzca el nombre del tamaño">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-light"><i class="icon-lock"></i> Actualizar</button>
@@ -57,6 +62,8 @@
             </div>
         </div>
     </div>
+
+
 
     @include('components.color-switcher')
     @include('components.scripts')
