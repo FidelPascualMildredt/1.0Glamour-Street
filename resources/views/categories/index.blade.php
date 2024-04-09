@@ -1,4 +1,12 @@
 @extends('layouts.app2')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Incluye SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+
+<!-- Incluye SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @section('content')
     <div class="container mt-5">
@@ -30,22 +38,53 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($categories as $category)
-                                    <tr>
-                                        <th scope="row">{{ $category->id }}</th>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->description }}</td>
-                                        <td>{{ $category->status }}</td>
-                                        <td>
-                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary">Ver</a>
-                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Editar</a>
-                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @foreach ($categories as $category)
+                                        <tr>
+                                            <th scope="row">{{ $category->id }}</th>
+                                            <td>{{ $category->name }}</td>
+                                            <td>{{ $category->description }}</td>
+                                            <td>{{ $category->status }}</td>
+                                            <td>
+                                                <a href="{{ route('categories.show', $category->id) }}"
+                                                    class="btn btn-primary">Ver</a>
+                                                <a href="{{ route('categories.edit', $category->id) }}"
+                                                    class="btn btn-warning">Editar</a>
+                                               
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-danger"
+                                                    onclick="confirmDelete({{ $category->id }})">
+                                                    Eliminar
+                                                </button>
+
+                                                <script>
+                                                    function confirmDelete(categoryId) {
+                                                        Swal.fire({
+                                                            title: '¿Estás seguro?',
+                                                            text: "Esta acción no se puede deshacer.",
+                                                            icon: 'warning',
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: '#d33',
+                                                            cancelButtonColor: '#3085d6',
+                                                            confirmButtonText: 'Sí, eliminarlo',
+                                                            cancelButtonText: 'Cancelar'
+                                                        }).then((result) => {
+                                                            if (result.isConfirmed) {
+                                                                // Si se confirma la eliminación, envía el formulario
+                                                                document.getElementById('deleteForm' + categoryId).submit();
+                                                            }
+                                                        });
+                                                    }
+                                                </script>
+
+                                                <!-- Formulario de eliminación -->
+                                                <form id="deleteForm{{ $category->id }}"
+                                                    action="{{ route('categories.destroy', $category->id) }}" method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -55,4 +94,5 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 @endsection

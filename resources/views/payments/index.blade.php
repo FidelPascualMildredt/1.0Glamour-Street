@@ -7,9 +7,7 @@
                 <h5 class="card-title"></h5>
             </div>
             <div class="col-lg-10 text-end">
-                <a href="{{ route('payments.create') }}" class="btn btn-primary"> <!-- Modificado el botón para redireccionar a la ruta 'payments.create' -->
-                    Agregar
-                </a>
+                <a href="{{ route('payments.create') }}" class="btn btn-primary">Agregar</a>
             </div>
             <div class="col-lg-10 text-end">
                 <h5 class="card-title"></h5>
@@ -21,28 +19,34 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
-                                <h5 class="card-title">Pagos</h5> <!-- Cambiado el título a 'Pagos' -->
+                                <h5 class="card-title">Pagos</h5>
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nombre</th> <!-- Cambiado 'Nombre' por 'Cantidad' -->
-                                        <th scope="col">Descrpcion</th> <!-- Añadido 'Fecha' como columna -->
+                                        <th scope="col">Cantidad</th> <!-- Cambiado 'Nombre' por 'Cantidad' -->
+                                        <th scope="col">Descripción</th> <!-- Cambiado 'Descrpcion' por 'Descripción' -->
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($payments as $payment) <!-- Cambiado '$roles' por '$payments' -->
+                                    @foreach($payments as $payment)
                                     <tr>
-                                        <th scope="row">{{ $payment->id }}</th> <!-- Cambiado '$role' por '$payment' -->
-                                        <td>{{ $payment->name }}</td> <!-- Cambiado 'name' por 'amount' -->
-                                        <td>{{ $payment->description }}</td> <!-- Añadido '$payment->date' como columna -->
+                                        <th scope="row">{{ $payment->id }}</th>
+                                        <td>{{ $payment->name }}</td>
+                                        <td>{{ $payment->description }}</td>
                                         <td>
-                                            <a href="{{ route('payments.show', $payment->id) }}" class="btn btn-primary">Ver</a> <!-- Cambiado 'roles' por 'payments' -->
-                                            <a href="{{ route('payments.edit', $payment->id) }}" class="btn btn-warning">Editar</a> <!-- Cambiado 'roles' por 'payments' -->
-                                            <form action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display: inline-block;">
+                                            <a href="{{ route('payments.show', $payment->id) }}" class="btn btn-primary">Ver</a>
+                                            <a href="{{ route('payments.edit', $payment->id) }}" class="btn btn-warning">Editar</a>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $payment->id }})">
+                                                Eliminar
+                                            </button>
+
+                                            <!-- Formulario de eliminación -->
+                                            <form id="deleteForm{{ $payment->id }}" action="{{ route('payments.destroy', $payment->id) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Eliminar</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -55,4 +59,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Incluye SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirmDelete(paymentId) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminarlo',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si se confirma la eliminación, envía el formulario
+                    document.getElementById('deleteForm' + paymentId).submit();
+                }
+            });
+        }
+    </script>
 @endsection

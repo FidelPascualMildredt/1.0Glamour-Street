@@ -7,9 +7,7 @@
                 <h5 class="card-title"></h5>
             </div>
             <div class="col-lg-10 text-end">
-                <a href="{{ route('products.create') }}" class="btn btn-primary"> <!-- Modificado el botón para redireccionar a la ruta 'products.create' -->
-                    Agregar
-                </a>
+                <a href="{{ route('products.create') }}" class="btn btn-primary">Agregar</a>
             </div>
             <div class="col-lg-10 text-end">
                 <h5 class="card-title"></h5>
@@ -32,7 +30,7 @@
                                         <th scope="col">Material</th>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Código</th>
-                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Categoría</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -43,10 +41,7 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->description }}</td>
                                         <td>{{ $product->price }}</td>
-
                                         <td><img src="{{ asset('images/' . $product->image) }}" width="150%"></td>
-                                        {{-- <td>{{ $product->size }}</td>
-                                        <td>{{ $product->color }}</td> --}}
                                         <td>{{ $product->material }}</td>
                                         <td>{{ $product->stock }}</td>
                                         <td>{{ $product->code }}</td>
@@ -54,10 +49,16 @@
                                         <td>
                                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver</a>
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Editar</a>
-                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;">
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $product->id }})">
+                                                Eliminar
+                                            </button>
+
+                                            <!-- Formulario de eliminación -->
+                                            <form id="deleteForm{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Eliminar</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -70,4 +71,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Incluye SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirmDelete(productId) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminarlo',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si se confirma la eliminación, envía el formulario
+                    document.getElementById('deleteForm' + productId).submit();
+                }
+            });
+        }
+    </script>
 @endsection
