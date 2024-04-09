@@ -67,6 +67,76 @@
         .shadow-dark {
             box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
         }
+
+
+        /* Card de categorias */
+        .card-container {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+
+        .card .front-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .card .front-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+
+        .card .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.366);
+            /* Opacidad del 70% */
+            color: #000;
+            /* Color del texto */
+            padding: 20px;
+            line-height: 1.5;
+            border-radius: 5px;
+            pointer-events: none;
+            transform: translateX(96%);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .card .content .heading {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .card:hover .content {
+            transform: translateY(0);
+        }
+
+        .card:hover .front-content {
+            transform: translateX(20%);
+        }
     </style>
 </head>
 
@@ -185,6 +255,77 @@
     <div class="container-fluid mt-4">
         <div class="row">
 
+            <div class="row justify-content-center">
+
+                <hr>
+                <h6>Categorias Destacadas</h6>
+                <br>
+                <div class="col-md-3">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="front-content">
+                                <img src="{{ asset('assets/images/carrusel/clasico.jpg') }}" class="d-block w-100"
+                                    alt="Imagen de categoría">
+                            </div>
+                            <div class="content">
+                                <p class="heading">Estilo clásico</p>
+                                <p>El estilo clásico es un estilo que no pasa de moda</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="front-content">
+                                <img src="{{ asset('assets/images/carrusel/urbano.jpg') }}" class="d-block w-100"
+                                    alt="Imagen de categoría">
+                            </div>
+                            <div class="content">
+                                <p class="heading">Estilo Urbano</p>
+                                <p>El estilo clásico es un estilo que no pasa de moda</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="front-content">
+                                <img src="{{ asset('assets/images/carrusel/retro.jpg') }}" class="d-block w-100"
+                                    alt="Imagen de categoría">
+                            </div>
+                            <div class="content">
+                                <p class="heading">Estilo Retro</p>
+                                <p>El estilo clásico es un estilo que no pasa de moda</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+
+                    <div class="card-container">
+                        <div class="card">
+                            <div class="front-content">
+                                <img src="{{ asset('assets/images/carrusel/minimalista.jpg') }}"
+                                    class="d-block w-100" alt="Imagen de categoría">
+                            </div>
+                            <div class="content">
+                                <p class="heading">Estilo Minimalista</p>
+                                <p>El estilo clásico es un estilo que no pasa de moda</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <br>
+            <br>
+            <hr>
+            <br>
+
+
             <!-- Sidebar con categorías -->
             <div class="col-md-3">
                 <div class="col-md-12 bg-dark p-3"
@@ -223,21 +364,19 @@
                         style="max-width: 800px; margin: 0 auto; border-radius: 10px;box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5); margin-bottom: 50px;">
                         <div class="carousel-inner">
                             <div class="carousel-item active" data-bs-interval="10000">
-                                <img src="{{ asset('assets/images/carrusel/woman.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('assets/images/carrusel/descuentos (1).jpg') }}"
+                                    class="d-block w-100"
                                     style="max-height: 250px; object-fit: cover; border-radius: 10px;" alt="...">
                             </div>
                             <div class="carousel-item" data-bs-interval="2000">
-                                <img src="{{ asset('assets/images/carrusel/mujer.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('assets/images/carrusel/des.jpg') }}" class="d-block w-100"
                                     style="max-height: 250px; object-fit: cover; border-radius: 10px;" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="{{ asset('assets/images/carrusel/deportivo.jpg') }}" class="d-block w-100"
+                                <img src="{{ asset('assets/images/carrusel/desc.jpg') }}" class="d-block w-100"
                                     style="max-height: 250px; object-fit: cover; border-radius: 10px;" alt="...">
                             </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('assets/images/carrusel/pantalon.jpg') }}" class="d-block w-100"
-                                    style="max-height: 250px; object-fit: cover; border-radius: 10px;" alt="...">
-                            </div>
+
                         </div>
                         <button class="carousel-control-prev" type="button"
                             data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
