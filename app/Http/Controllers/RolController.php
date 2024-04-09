@@ -48,7 +48,7 @@ class RolController extends Controller
 
         $role = Rol::findOrFail($id);
 
-        // Pass the role data to the view
+
         return view('Role.show', compact('role'));
     }
 
@@ -66,19 +66,19 @@ class RolController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Buscar el rol por su ID
+
     $role = Rol::findOrFail($id);
 
-    // Validar los datos de la solicitud
+
     $request->validate([
         'name' => 'required|string|max:255',
-        // Agregar reglas de validación para otros campos si es necesario
+
     ]);
 
-    // Actualizar el rol con los datos validados
+
     $role->update($request->all());
 
-    // Redirigir al usuario a una página relevante
+
     return redirect()->route('roles.index')
         ->with('success', '¡Rol actualizado satisfactoriamente!');
 
@@ -90,13 +90,13 @@ class RolController extends Controller
      */
     public function destroy(string $id)
     {
-        // Retrieve the role with the given ID from the database
+
         $role = Rol::findOrFail($id);
 
-        // Delete the role
+
         $role->delete();
 
-        // Redirect to a relevant page (e.g., index page)
+
         return redirect()->route('roles.index')->with('success', 'Rol borrado!!.');
     }
 }
