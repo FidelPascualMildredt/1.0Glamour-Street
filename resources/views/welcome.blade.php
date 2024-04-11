@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -453,6 +453,7 @@
 
 
     <!-- Modal -->
+    {{-- <div class="modal fade" id="exampleModal{{ $product->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $product->id }}" aria-hidden="true"> --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -464,7 +465,8 @@
                     <div class="row">
                         <!-- Columna para la imagen -->
                         <div class="col-md-6">
-                            <img src="{{ asset('images/' . $product->image) }}" width="60%" class="img-fluid"
+
+                            <img src="{{ asset('images/' . $product->image) }}" width="100%" class="img-fluid"
                                 alt="Producto">
                         </div>
                         <!-- Columna para la información -->
@@ -571,7 +573,7 @@
             cantidadInput.value = cantidad + 1; // Aumentar la cantidad en 1
         });
 
-
+        // BONOTES DE LIKE
         document.addEventListener('DOMContentLoaded', function() {
             // Obtener todos los botones de "dar like"
             var likeButtons = document.querySelectorAll('.like-btn');
@@ -588,6 +590,7 @@
                 });
             });
         });
+
 
 
     </script>

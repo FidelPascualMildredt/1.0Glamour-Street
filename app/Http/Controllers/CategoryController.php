@@ -91,7 +91,7 @@ class CategoryController extends Controller
     }
     public function boton()
     {
-  
+
         $categories = Category::all(); // Obtener todas las categorías
         return view('welcome', compact('categories')); // Pasar las categorías a la vista
     }

@@ -155,11 +155,12 @@ class ProductController extends Controller
 
     public function displayProducts()
     {
-
         $products = Product::all();
         $categories = Category::all();
+        // dd($categories);
         $colors = Color::all();
         $sizes = Size::all();
-        return view('welcome', compact('products', 'categories', 'colors', 'sizes'));
+        return view('layouts.web', compact('products', 'categories', 'colors', 'sizes'));
+        // return view('welcome', compact('products', 'categories', 'colors', 'sizes'));
     }
 }

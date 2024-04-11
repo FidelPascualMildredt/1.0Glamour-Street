@@ -21,7 +21,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('components.head')
-    
+
 </head>
 <body class="bg-theme bg-theme1">
     @include('components.header')

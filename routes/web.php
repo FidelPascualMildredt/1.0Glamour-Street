@@ -14,6 +14,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
 use App\Actions\Fortify\CreateNewUser;
 use App\Models\Payment;
+use Illuminate\Http\Client\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,9 @@ use App\Models\Payment;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('layouts.web');
+// });
 
 Route::middleware([
     'auth:sanctum',
@@ -53,13 +54,19 @@ Route::resource('colors', ColorController::class);
 Route::resource('sizes', SizeController::class);
 
 
-Route::post('/register', [CreateNewUser::class, 'create'])->name('register');
-
+// Route::post('/register', [CreateNewUser::class, 'create'])->name('register');
+// Route::post('/register/{user}', function ($user) {
+//     dd($user);
+// });
 //rutas de las vistas
 
-Route::get('/', [CategoryController::class, 'boton'])->name('welcome');
+// Route::get('/', [CategoryController::class, 'boton'])->name('welcome');
 Route::get('/', [ProductController::class, 'displayProducts'])->name('productos.display');
-Route::get('/carrito', [PaymentController::class, 'carrito'])->name('carrito');
+
+Route::get('/carrito', function () {
+    return view('web.carrito');
+})->name('carrito');
+// Route::get('/carrito', [PaymentController::class, 'carrito'])->name('carrito');
 
 
 
